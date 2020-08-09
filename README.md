@@ -2,7 +2,7 @@ This project is a portfolio selection algorithm that address some of the shortco
 
 # Usage
 
-First, it necessary to collect the relevant data for the candidate stocks in consideration by running `data_collector.py`. This will collect OHLC data from Yahoo and store it in the `data` directory in an individual file for each symbol. Additionlly, a file is created in the root directory which collates the data for each symbol into a singular file.
+First, it necessary to collect the relevant data for the candidate stocks in consideration by running `data_collector.py`. This will collect OHLC data from Yahoo and store it in the `data` directory in an individual file for each symbol. Additionlly, a file is created in the root directory which collates the data for each symbol into a singular file. The stocks for which data is collected are stored in a list in the `stocks.py` file. By default, this contains only constituents of the S&P 500.
 
 Then run the scripts from the terminal with
 
