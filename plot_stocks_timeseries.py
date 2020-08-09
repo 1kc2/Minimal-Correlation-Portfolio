@@ -13,7 +13,8 @@ def plot_stocks_timeseries():
 
     xtick_locator = AutoDateLocator()
     xtick_formatter = AutoDateFormatter(xtick_locator)
-
+    
+    # the two stocks to compare
     df["UNH"].plot()
     df["NKE"].plot()
     ax.xaxis.set_major_locator(xtick_locator)
