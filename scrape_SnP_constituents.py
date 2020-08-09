@@ -43,21 +43,8 @@ def extract():
             sector = fields[3].text.rstrip()
             records.append([symbol, name, sector])
             symbols.append(symbol)
-
+    print(symbols)
     return symbols
-    # header = ["Symbol", "Name", "Sector"]
-    # writer = csv.writer(
-    #     open("./data/constituents.csv", "w"), lineterminator="\n"
-    # )
-    # writer.writerow(header)
-    # # Sorting ensure easy tracking of modifications
-    # records.sort(key=lambda s: s[1].lower())
-    # writer.writerows(records)
-
-    # with open("./data/constituents_symbols.txt", "w") as f:
-    #     # Sorting ensure easy tracking of modifications
-    #     symbols.sort(key=lambda s: s[0].lower())
-    #     f.writelines(symbols)
 
 
 def get_constituents():
