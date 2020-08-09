@@ -43,7 +43,6 @@ def extract():
             sector = fields[3].text.rstrip()
             records.append([symbol, name, sector])
             symbols.append(symbol)
-    print(symbols)
     return symbols
 
 
