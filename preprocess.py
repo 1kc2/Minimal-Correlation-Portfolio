@@ -1,40 +1,14 @@
 import pandas as pd
 import numpy as np
 import re
+from stocks import tickers
 
 cols = ["Date", "Open", "High", "Low", "Close", "Volume", "Name"]
-name = [
-    "MMM",
-    "AXP",
-    "AAPL",
-    "BA",
-    "CAT",
-    "CVX",
-    "CSCO",
-    "KO",
-    "DIS",
-    "XOM",
-    "GE",
-    "GS",
-    "HD",
-    "IBM",
-    "INTC",
-    "JNJ",
-    "JPM",
-    "MCD",
-    "MRK",
-    "MSFT",
-    "NKE",
-    "PFE",
-    "PG",
-    "TRV",
-    "UTX",
-    "UNH",
-    "VZ",
-    "WMT",
-    "GOOGL",
-    "AMZN",
-]
+name = tickers
+
+# TODO Create seperate folder for Volume correlation network analysis
+# TODO Repeat workflow and compute graph similarity between networks.
+
 
 def preprocess():
     # read the csv file in a dataframe

@@ -1,40 +1,10 @@
 import pandas as pd
 import numpy as np
 import preprocess as pre
+from stocks import tickers
 
 cols = ["Date", "Open", "High", "Low", "Close", "Volume", "Name"]
-names = [
-    "MMM",
-    "AXP",
-    "AAPL",
-    "BA",
-    "CAT",
-    "CVX",
-    "CSCO",
-    "KO",
-    "DIS",
-    "XOM",
-    "GE",
-    "GS",
-    "HD",
-    "IBM",
-    "INTC",
-    "JNJ",
-    "JPM",
-    "MCD",
-    "MRK",
-    "MSFT",
-    "NKE",
-    "PFE",
-    "PG",
-    "TRV",
-    "UTX",
-    "UNH",
-    "VZ",
-    "WMT",
-    "GOOGL",
-    "AMZN",
-]
+names = tickers
 
 
 def detrend():
