@@ -17,6 +17,8 @@ python plot_correlation_network.py
 
 will plot a time series correlation network using the data in the repository.
 
+![Correlation Network](img/correlation_network.png)
+
 # Dependencies
 
 A comprehensive list of current dependencies include the following libraries
