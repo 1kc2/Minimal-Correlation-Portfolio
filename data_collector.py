@@ -5,7 +5,7 @@ from stocks import tickers
 
 # enter the dates for which to collect data
 start = datetime.datetime(2006, 1, 1)
-end = datetime.datetime(2020, 1, 1)
+end = datetime.datetime(2020, 7, 31)
 
 start_date_str = str(start.date())
 end_date_str = str(end.date())
