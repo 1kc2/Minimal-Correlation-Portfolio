@@ -19,6 +19,50 @@ will plot a time series correlation network using the data in the repository.
 
 ![Correlation Network](img/correlation_network.png)
 
+In the above visualization, the sizes of the vertices are proportional to the number of connections they have. The colorbar to the right indicates the degree of disimilarity (the distance) between the stocks. The larger the value (the lighter the color) the less similar the stocks are.
+
+## Preprocessing the data
+
+### Exploratory Data Analysis and Cleaning
+Before we dive into the meat of our asset allocation model, we first explore, clean, and preprocess our historical price data for time-series analyses. In this section we complete the following.
+
+- Observe how many rows and columns are in our dataset and what they mean.
+- Observe the datatypes of the columns and update them if needed.
+- Take note of how the data is structured and what preprocessing will be necessary for time-series analyses.
+- Deal with any missing data accordingly.
+
+## Building an Asset Correlation Network
+
+Once that the data is preprocessed we can start thinking our way through the below problem creatively.
+
+Given the <img src="https://render.githubusercontent.com/render/math?math=N"> assets in our portfolio, find a way of computing the allocation weights <img src="https://render.githubusercontent.com/render/math?math=\omega_{i}">, <img src="https://render.githubusercontent.com/render/math?math=(\Sigma_{i=1}^{N}\,\omega_{i}=1)"> such that assets more correlated with each other obtain lower weights while those less correlated with each other obtain higher weights.
+
+One way of tackling the above is to think of our portfolio as a weighted graph. Intuitively, a graph captures the relations between objects – abstract or concrete. Mathematically, a weighted graph is an ordered tuple <img src="https://render.githubusercontent.com/render/math?math=G=(V,E,W)"> where <img src="https://render.githubusercontent.com/render/math?math=V"> is a set of vertices (nodes), <img src="https://render.githubusercontent.com/render/math?math=E"> is the set of pairwise relationships between the vertices (edges), and <img src="https://render.githubusercontent.com/render/math?math=W"> is a set of numerical values assigned to each edge.
+
+A useful represention of <img src="https://render.githubusercontent.com/render/math?math=G"> is the adjacency matrix:
+
+<div align="center"><img src="https://render.githubusercontent.com/render/math?math=A_{ij}=1,\text{if}\,i\,\text{is}\,\text{adjacent}\,\text{to}\,j"></div>
+<div align="center"><img src="https://render.githubusercontent.com/render/math?math=A_{ij}=0,\text{otherwise}"></div>
+
+Here the pairwise relations are expressed as the <img src="https://render.githubusercontent.com/render/math?math=ij"> entries of an <img src="https://render.githubusercontent.com/render/math?math=N\times N"> matrix where <img src="https://render.githubusercontent.com/render/math?math=N"> is the number of nodes. In what follows, the adjacency matrix becomes a critical instrument of our asset allocation algorithm. **Our strategy is to transform the historical pricing data into a graph with edges weighted by the correlations between each stock.** Once the time series data is in this form, we use graph centrality measures and graph algorithms to obtain the desired allocation weights. To construct the weighted graph we adopt the winner-take-all method presented by [Tse, *et al*. (2010)](http://cktse.eie.polyu.edu.hk/pdf-paper/JoEF-1009.pdf) with a few modifications. (See [Stock Correlation Network](https://en.wikipedia.org/wiki/Stock_correlation_network) for a summary.) Our workflow in this section is as follows.
+
+1. Compute the distance correlation matrix <img src="https://render.githubusercontent.com/render/math?math=\rho_{D}(X_{i},X_{j})"> for the `Open`, `High`, `Low`, `Close`, and `Close_diff` time series.
+
+2. Use the NetworkX module to transform each distance correlation matrix into a weighted graph.
+
+3. Adopt the winner-take-all method and remove edges with correlations below a threshold value of <img src="https://render.githubusercontent.com/render/math?math=\rho_{c}=0.325">
+
+<div align="center"><img src="https://render.githubusercontent.com/render/math?math=Cor_{ij}=\rho_{D}(X_{i},Y_{j}),\rho\geq\rho_{c}"></div>
+<div align="center"><img src="https://render.githubusercontent.com/render/math?math=Cor_{ij}=0,\text{otherwise}"></div>
+
+A threshold value of 0.325 is arbitrary. In practice, the threshold cannot be such that the graph is disconnected, as many centrality measures are undefined for nodes without any connections.
+
+4. Inspect the distribution of edges (the so-called degree distribution) for each network. The degree of a node is simply the number of connections it has to other nodes. Algebraically, the degree of the ith vertex is given as,
+
+<div align="center"><img src="https://render.githubusercontent.com/render/math?math=Deg(i)=\sum_{j\!\!=\!\!1}^{N}A_{ij}"></div>
+
+5. Build a master network by averaging over the edge weights of the `Open`, `High`, `Low`, `Close`, and `Close_diff` networks and derive the asset weights from its structure.
+
 # Dependencies
 
 A comprehensive list of current dependencies include the following libraries
