@@ -1,3 +1,5 @@
+# Minimal Correlation Portfolio
+
 This project is a portfolio selection algorithm that address some of the shortcomings of the efficient frontier model of modern portfolio theory (MPT). The algorithm is designed to handle historical time series of unequal dimensions and detect non-linear associations between assets, enabling optimization across asset classes with sparse data.
 
 # Usage
