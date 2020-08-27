@@ -14,7 +14,7 @@ python3 {filename}.py
 
 For example
 ```
-python plot_correlation_network.py
+python3 plot_correlation_network.py
 ```
 
 will plot a time series correlation network using the data in the repository.
